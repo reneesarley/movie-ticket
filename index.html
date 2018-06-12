@@ -18,24 +18,44 @@
     <form>
       <div class="form-group">
         <label for="exampleFormControlSelect1">Select a movie:</label>
-        <select class="form-control" id="exampleFormControlSelect1">
+        <select class="form-control" id="titleSelection">
           <option>Deadpool</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+          <option>Dawn of the Dead</option>
+          <option>Cars 2</option>
+          <option>The Royal Tenenbaums</option>
+          <option>Bottle Rocket</option>
         </select>
       </div>
       <div class="form-group">
         <label for="exampleFormControlSelect1">Select a time:</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>Deadpool</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <select class="form-control" id="timeSelection">
+          <option>1200</option>
+          <option>1430</option>
+          <option>1600</option>
+          <option>1845</option>
+          <option>2200</option>
         </select>
       </div>
+      <h2>Discounts:</h2>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="discountInput" id="exampleRadios1" value="seniorDiscount">
+        <label class="form-check-label" for="exampleRadios1">
+          Senior (Over 55)
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="discountInput" id="exampleRadios2" value="studentDiscount">
+        <label class="form-check-label" for="exampleRadios2">
+          Student
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="discountInput" id="exampleRadios1" value="childDiscount">
+        <label class="form-check-label" for="exampleRadios1">
+          Child (Under 12)
+        </label>
+      </div>
+      <button type="button" id="submitButton" class="btn btn-primary">Primary</button>
   </form>
   </div>
 </body>
