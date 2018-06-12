@@ -1,17 +1,58 @@
+var allMovies = [];
 
 // userlogic
-
 $(function(){
 
-  $("#submitButton").click(function() {
+  $("#timesButton").click(function(){
+    $("#timeDiv").show();
+    $("#timeSelection").empty();
+    var deadpool = new Movie ("Deadpool", "R", [1200, 1300, 1400], "firstRelease")
+    var dawnOfTheDead = new Movie ("Dawn of the Dead", "R", [1500, 1600], "secondRun")
+    var cars = new Movie ("Cars 2", "PG", [1700], "secondRun")
+    var tenenbaums = new Movie ("The Royal Tenenbaums", "PG-13", [1700], "secondRun")
+    var bottlerocket = new Movie ("Bottle Rocket", "PG-13", [1700], "secondRun")
+    var movieName = $('#titleSelection :selected').text();
+
+
+    for (mov = 0; mov < allMovies.length; ++mov) {
+      console.log("main loop")
+      if (movieName === allMovies[mov].movieName) {
+        for (i = 0; i < allMovies[mov].timesArray.length; ++i) {
+          $("#timeSelection").append("<option>" + allMovies[mov].timesArray[i] + "</option>");
+        }
+        break
+      }
+    }
+    $("#timeSelection").clear
+  })
+
+  $("#submitButton").click(function(event) {
+    event.preventDefault();
     var movieName = $('#titleSelection :selected').text();
     var movieTime = $('#timeSelection :selected').text();
     var movieDiscount = $('input:radio[name=discountInput]:checked').val();
     var newTicket = new Ticket(movieName, movieTime, movieDiscount)
     console.log(newTicket);
+    $("#movie-name").text(newTicket.movie);
+    $("#show-time").text(newTicket.mTime);
+    $("#movie-rating").text(newTicket.mRating);
+    $("#total-cost").text(newTicket.cost);
     return newTicket;
   })
+
+  $("#titleSelection").click(function(){
+    $("#timeDiv").hide();
+    $("input:radio[name=discountInput]").removeAttr("checked")
+  })
+
 });
+
+// business logic
+
+Movie.prototype.pushToArray = function() {
+  allMovies.push(this)
+  return allMovies
+}
 
 function Movie(name, rating, times, type) {
   this.movieName = name
@@ -19,9 +60,10 @@ function Movie(name, rating, times, type) {
   this.timesArray = times
   this.type = type
   this.addToFirstReleaseArray(type)
+  this.pushToArray();
 }
 var firstReleaseArry = []
- Movie.prototype.addToFirstReleaseArray = function(movieType) {
+Movie.prototype.addToFirstReleaseArray = function(movieType) {
   if( movieType === "firstRelease"){
     firstReleaseArry.push(this.movieName);
   } else {
@@ -29,23 +71,24 @@ var firstReleaseArry = []
   }
 }
 
-var deadpool = new Movie ("Deadpool", "R", [1200, 1600, 2200], "firstRelease")
-var dawnOfTheDead = new Movie ("Dawn of the Dead", "R", [1200, 1600, 2200], "secondRun")
-
-
-
-// business logic
 function Ticket(movieName, movieTime, discountType) {
   this.movie = movieName
   this.mTime = movieTime
+  this.mRating = this.getMovieRating(movieName)
   this.movieType = this.getMovieType(movieName)
   var showType = this.makeShowType(movieTime)
   var cost = this.calcCost(movieType, discountType, showType)
   this.cost = cost
 }
 
+Ticket.prototype.getMovieRating = function(movieName) {
+  for (mov = 0; mov < allMovies.length; ++mov) {
+    if (movieName === allMovies[mov].movieName) {
+      return allMovies[mov].rating;
+    }
+  }
+}
 
-//   this.movie -> movieType
 Ticket.prototype.getMovieType = function(title) {
   if (firstReleaseArry.includes(title)) {
     movieType = "firstRelease"

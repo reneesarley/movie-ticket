@@ -19,21 +19,17 @@
       <div class="form-group">
         <label for="exampleFormControlSelect1">Select a movie:</label>
         <select class="form-control" id="titleSelection">
-          <option>Deadpool</option>
+          <option id="deadpool">Deadpool</option>
           <option>Dawn of the Dead</option>
           <option>Cars 2</option>
           <option>The Royal Tenenbaums</option>
           <option>Bottle Rocket</option>
         </select>
       </div>
-      <div class="form-group">
+      <button type="button" id="timesButton" class="btn btn-primary">View Show Times</button>
+      <div id="timeDiv" class="form-group">
         <label for="exampleFormControlSelect1">Select a time:</label>
         <select class="form-control" id="timeSelection">
-          <option>1200</option>
-          <option>1430</option>
-          <option>1600</option>
-          <option>1845</option>
-          <option>2200</option>
         </select>
       </div>
       <h2>Discounts:</h2>
@@ -55,8 +51,15 @@
           Child (Under 12)
         </label>
       </div>
-      <button type="button" id="submitButton" class="btn btn-primary">Primary</button>
+      <button type="button" id="submitButton" class="btn btn-primary">Submit</button>
   </form>
+    <div id="ticket">
+      <h2>Order Summary:</h2>
+      <p>Movie Name: <span id="movie-name"></span></p>
+      <p>Show Time: <span id="show-time"></span></p>
+      <p>Rating: <span id="movie-rating"></span></p>
+      <p>Cost: <span id="total-cost"></span></p>
+    </div>
   </div>
 </body>
 </html>
